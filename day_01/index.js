@@ -24,17 +24,25 @@ const separator = '';
 
 const newCalories = lines
 .reduce(
-    (acc, total ) => {
-if (total == separator) {
-    acc.totalCalories.push(acc.sum)
-    acc.sum = 0
+    (acc, currentVal ) => {
+        if (currentVal == separator) {
+            acc.totalCalories.push(acc.sum)
+            acc.sum = 0
 }else {
-    acc.sum += Number(total)
+    acc.sum += Number(currentVal)
 }
 return acc
 }, {totalCalories: [], sum: 0}
 )
 
 console.log((Math.max(...newCalories.totalCalories)))
+
+//part two
+const topThree = newCalories.totalCalories.sort((a,b) => b-a).splice(0,3)
+const totalTopThree = topThree.reduce(
+    (acc, currentVal) => 
+        acc + currentVal,0)
+
+console.log({totalTopThree})
 
 
