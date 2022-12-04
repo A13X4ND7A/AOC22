@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon day_01/index.js",
     "start-server": "node day_01/index.js",
-    "dev": "nodemon day_01/index.js -L"
+    "dev": "nodemon day_02/index.js -L"
   },
   "repository": {
     "type": "git",
