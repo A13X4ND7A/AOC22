@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { deflateRaw } = require('zlib')
 
 const lines = fs
 .readFileSync('day_02/day_02_input.txt', {encoding: "utf-8"})
@@ -25,8 +26,9 @@ const lines = fs
 // 3 draw
 // 6 win
 
-
-
+// X loose
+// Y Draw
+// Z Win
 const shapeSelected = {
     A: 1,
     B: 2,
@@ -37,23 +39,28 @@ const shapeSelected = {
 }
 
 const outcome = {
-    win: 6,
-    draw: 3,
-    loose: 0
+    Y: 'draw',
+    X: 'loose',
+    Z: 'win'
 }
 
 const toLoose = {
+    A: 'C',
+    B: 'A',
+    C: 'B'
+}
+
+const toWin = {
     A: 'B',
     B: 'C',
     C: 'A'
 }
-const playerInput = {
-    X: 'A',
-    Y: 'B',
-    Z: 'C'
-}
 
-
+// const playerInput = {
+//     X: 'A',
+//     Y: 'B',
+//     Z: 'C'
+// }
 
 const opponent = lines.map(line => {
     letter = line?.charAt(0)
@@ -68,7 +75,7 @@ const player = lines.map(line => {
     letter = line?.charAt(2)
     score = shapeSelected[letter]
     return {
-        letter: playerInput[letter],
+        letter: outcome[letter],
         score: score
     }
     
@@ -76,17 +83,32 @@ const player = lines.map(line => {
 let totalScore = []
 
 const isAWinner = (item, index) => {
-    if(toLoose[item?.letter] === player[index].letter ) {
-        totalScore.push(player[index].score + 6)
-        // console.log('player won')
-    } else {
-    if (player[index].letter === opponent[index].letter){
-        totalScore.push(player[index].score + 3)
-       // console.log("draw")
-    }else {
-        totalScore.push(player[index].score)
-        // console.log('Player Lost')
-    }
+    // if(toLoose[item.letter] === player[index].letter ) {
+    //     totalScore.push(player[index].score + 6)
+    
+    // } else {
+    // if (player[index].letter === opponent[index].letter){
+    //     totalScore.push(player[index].score + 3)
+    //    // console.log("draw")
+    // }else {
+    //     totalScore.push(player[index].score)
+    //     // console.log('Player Lost')
+    // }
+
+    // }
+
+    switch(player[index].letter){
+        case 'draw':
+            totalScore.push(opponent[index].score + 3)
+        break
+        case 'win':
+            totalScore.push(shapeSelected[toWin[opponent[index].letter]] + 6)
+        break
+
+        case 'loose':
+            totalScore.push(shapeSelected[toLoose[opponent[index].letter]] )
+        break
+
     }
 }
 
@@ -97,7 +119,7 @@ const opponentPlayed = (opp) => {
     }, 0)
     console.log(total)
 }
-console.log(opponentPlayed(opponent))
+opponentPlayed(player)
 
 
 
