@@ -1,18 +1,30 @@
+
 {
-  "name": "AOC_2022",
+  "name": "adventofcode_2022",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon day_04/part_01.js",
-    "dev": "nodemon day_04/part_01.js",
-    "build": "echo This is a static template, there is no bundler or bundling involved!"
+    "start-server": "node day_01/index.js",
+    "dev": "nodemon day_02/index.js -L"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/A13X4ND7A/adventOfCode_2022.git"
   },
   "keywords": [],
-  "author": "Alexandra Faller",
-  "license": "MIT",
-  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/A13X4ND7A/adventOfCode_2022/issues"
+  },
+  "homepage": "https://github.com/A13X4ND7A/adventOfCode_2022#readme",
   "dependencies": {
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.20"
   }
 }
